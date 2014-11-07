@@ -1,6 +1,6 @@
 package exerciseTwo
 
-import akka.actor.ActorSystem
+import akka.actor.{ActorSystem, Props}
 
 // ------------
 // EXERCISE 2
@@ -10,11 +10,16 @@ import akka.actor.ActorSystem
 // See video.imageUtils.CircleProperties and video.imageUtils.ImageUtils
 class CircleGenerator extends akka.actor.Actor {
 
-  override def receive: Receive = ???
+  override def receive: Receive = {
+    case CircleGenerator.GenerateCircle(w, h) =>
+      // TODO IMPLEMENT ME
+  }
 
 }
 
 object CircleGenerator {
+
+  case class GenerateCircle(width:Int, height:Int)
 
   /**
    * run:
@@ -28,5 +33,12 @@ object CircleGenerator {
     // Fill in the code necessary to create the Actor in the ActorSystem and send it a message.
     // TODO - Your code here.
 
+    val random = scala.util.Random
+
+    val actor = system.actorOf(Props[CircleGenerator], "circleGenerator")
+    actor ! GenerateCircle(random.nextInt(), random.nextInt())
+
+    system.shutdown()
+    system.awaitTermination()
   }
 }

@@ -1,8 +1,8 @@
 package exerciseThree
 
+import akka.actor._
+import akka.stream.actor._
 import video.Frame
-import akka.stream.actor.ActorProducer
-import akka.actor.ActorSystem
 
 // ------------
 // EXERCISE 3.1
@@ -16,19 +16,21 @@ import akka.actor.ActorSystem
 //      onNext(Frame ... )
 //
 // See video.imageUtils.ImageUtils.createBufferedImage
-class CircleProducer extends ActorProducer[Frame] {
+class CirclePublisher extends ActorPublisher[Frame] {
 
   override def receive: Receive = {
 
-    case ActorProducer.Request(elements) => ???
+    case ActorPublisherMessage.Request(elements) =>
+      // TODO IMPLEMENT ME
 
-    case ActorProducer.Cancel => context stop self
+    case ActorPublisherMessage.Cancel =>
+      // TODO IMPLEMENT ME
   }
 
 }
 
 
-object CircleProducer {
+object CirclePublisher {
 
   /**
    * run:
@@ -42,7 +44,9 @@ object CircleProducer {
     // Fill in the code necessary to construct a UI to consume and display the Frames produced
     // by the Circle producer.
 
-    // TODO - Your code here.
+    val display = video.display(system)
 
+    val circleProducer = system.actorOf(Props[CirclePublisher], "circleProducer")
+    ActorPublisher(circleProducer).subscribe(display)
   }
 }
