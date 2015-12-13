@@ -1,8 +1,4 @@
-Akka streams activator template
-===============================
+This repo is pretty outdated
+============================
 
-Demonstrate Akka streams in Scala.
-
-Akka Streams is an implementation of [Reactive Streams](http://www.reactive-streams.org/),
-which is a standard for asynchronous stream processing with non-blocking backpressure.
-
+To find the most up to date reference material for Akka Streams and HTTP go to https://www.typesafe.com/activator/templates and search for "Akka Streams".
